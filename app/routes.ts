@@ -5,4 +5,5 @@ export default [
 
   route("/auth", "routes/auth.tsx"), //This is normal route not default.
   route("/upload-resume", "routes/upload.tsx"),
+  route("/ats/:id", "routes/ATSDetails.tsx"),
 ] satisfies RouteConfig;
