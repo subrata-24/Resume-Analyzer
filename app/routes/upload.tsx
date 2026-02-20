@@ -1,3 +1,4 @@
+import { AIResponseFormat } from "constants";
 import { prepareInstructions } from "constants";
 import React, { useState, type FormEvent } from "react";
 import { useNavigate } from "react-router";
@@ -59,7 +60,7 @@ const upload = () => {
 
     const feedback = await ai.feedback(
       uploadFile.path,
-      prepareInstructions({ jobTitle, jobDescription }),
+      prepareInstructions({ jobTitle, jobDescription, AIResponseFormat }),
     );
     if (!feedback) return setStatusText("Error: Failed to anaylyze resume");
 
