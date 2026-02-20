@@ -1,12 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router";
 import ScoreCircle from "./ScoreCircle";
+import { usePuterStore } from "~/lib/puter";
 
 const ResumeCart = ({
   resume: { id, companyName, jobTitle, feedback, imagePath },
 }: {
   resume: Resume;
 }) => {
+  const { fs } = usePuterStore();
+  const [imageUrl, setImageUrl] = useState("");
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadImage = async () => {
+      try {
+        setLoading(true);
+        const imageBlob = await fs.read(imagePath);
+        if (!imageBlob) {
+          setLoading(false);
+          return;
+        }
+
+        let imageUrl = URL.createObjectURL(imageBlob);
+        setImageUrl(imageUrl);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadImage();
+  }, [imagePath]);
+
   return (
     <Link
       to={`resume/${id}`}
@@ -23,13 +47,17 @@ const ResumeCart = ({
         <div className="flex-shrink-0 scale-90">
           {" "}
           {/* Slightly smaller circle */}
-          <ScoreCircle score={feedback.overallScore} />
+          <ScoreCircle score={feedback?.overallScore} />
         </div>
       </div>
 
       {/* Small Resume Preview */}
       <div className="gradient-image-border">
-        <img src={imagePath} alt={`${companyName} resume`} />
+        {loading ? (
+          <div className="w-full aspect-video bg-gray-200 animate-pulse rounded" />
+        ) : (
+          <img src={imageUrl} alt={`${companyName} resume`} />
+        )}
       </div>
     </Link>
   );
