@@ -398,7 +398,16 @@ export const usePuterStore = create<PuterStore>((set, get) => {
       setError("Puter.js not available");
       return;
     }
-    return puter.kv.delete(key);
+
+    if (typeof puter.kv.delete === "function") {
+      return puter.kv.delete(key);
+    } else {
+      // fallback: overwrite with empty string
+      console.warn(
+        "Puter.kv.delete not available, using kv.set(key, '') instead",
+      );
+      return puter.kv.set(key, "");
+    }
   };
 
   const listKV = async (pattern: string, returnValues?: boolean) => {

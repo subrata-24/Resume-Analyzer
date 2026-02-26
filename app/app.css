@@ -54,11 +54,11 @@ form {
 
 @layer components {
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#AB8C95] via-[#000000] to-[#8E97C5];
+    @apply bg-clip-text text-transparent bg-linear-to-r from-[#AB8C95] via-[#000000] to-[#8E97C5];
   }
 
   .gradient-border {
-    @apply bg-gradient-to-b from-light-blue-100 to-light-blue-200 p-4 rounded-2xl;
+    @apply bg-linear-to-b from-light-blue-100 to-light-blue-200 p-4 rounded-2xl;
   }
 
   .primary-button {
@@ -82,7 +82,7 @@ form {
   }
 
   .auth-button {
-    @apply primary-gradient rounded-full py-4 px-8 cursor-pointer w-[600px] max-md:w-full text-3xl font-semibold text-white;
+    @apply primary-gradient rounded-full py-4 px-8 cursor-pointer w-150 max-md:w-full text-3xl font-semibold text-white;
   }
 
   .main-section {
@@ -114,7 +114,7 @@ form {
   }
 
   .resume-card-header {
-    @apply flex flex-row gap-2 justify-between min-h-[110px] max-sm:flex-col items-center max-md:justify-center max-md:items-center;
+    @apply flex flex-row gap-2 justify-between min-h-27.5 max-sm:flex-col items-center max-md:justify-center max-md:items-center;
   }
 
   .gradient-image-border {
@@ -130,8 +130,132 @@ form {
     @apply flex flex-col gap-8 w-1/2 px-8 max-lg:w-full py-6;
   }
 
-  .navbar {
-    @apply flex flex-row justify-between items-center bg-white rounded-full p-4 w-full px-10 max-w-[1200px] mx-auto;
+  .navbar-modern {
+    @apply sticky top-0 z-50 w-full py-4 px-4 sm:px-8;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(249, 250, 251, 0.95) 100%
+    );
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.08);
+    animation: slideDown 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .navbar-content {
+    @apply flex flex-row justify-between items-center w-full max-w-350 mx-auto px-4 sm:px-6;
+  }
+
+  .navbar-logo {
+    @apply no-underline transition-transform duration-300 hover:scale-105;
+  }
+
+  .logo-wrapper {
+    @apply relative;
+  }
+
+  .navbar-title {
+    @apply text-3xl sm:text-4xl font-black bg-clip-text text-transparent;
+    background-image: linear-gradient(
+      135deg,
+      #667eea 0%,
+      #764ba2 50%,
+      #f093fb 100%
+    );
+    background-size: 300% 300%;
+    animation: gradientShift 8s ease infinite;
+    letter-spacing: -1px;
+  }
+
+  @keyframes gradientShift {
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  .navbar-actions {
+    @apply flex gap-3 sm:gap-4 items-center;
+  }
+
+  .navbar-button {
+    @apply relative px-4 sm:px-6 py-2.5 sm:py-3 rounded-full font-semibold text-sm sm:text-base;
+    @apply transition-all duration-300 overflow-hidden cursor-pointer;
+    @apply border border-transparent outline-none;
+  }
+
+  .navbar-button-primary {
+    @apply text-white;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    box-shadow: 0 4px 15px 0 rgba(102, 126, 234, 0.4);
+  }
+
+  .navbar-button-primary:hover {
+    @apply -translate-y-0.5 shadow-lg;
+    box-shadow: 0 6px 20px 0 rgba(102, 126, 234, 0.6);
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+  }
+
+  .navbar-button-primary:active {
+    @apply translate-y-0;
+    box-shadow: 0 2px 10px 0 rgba(102, 126, 234, 0.4);
+  }
+
+  .navbar-button-secondary {
+    @apply text-gray-700 bg-white border-gray-200;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.08);
+  }
+
+  .navbar-button-secondary:hover {
+    @apply -translate-y-0.5 text-gray-900 border-gray-300 shadow-md;
+    background: linear-gradient(135deg, #f5f7fa 0%, #ffffff 100%);
+  }
+
+  .navbar-button-secondary:active {
+    @apply translate-y-0 shadow-sm;
+  }
+
+  .button-shine {
+    @apply absolute inset-0 opacity-0;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent
+    );
+    animation: shine 3s infinite;
+  }
+
+  @keyframes shine {
+    0% {
+      left: -100%;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      left: 100%;
+      opacity: 0;
+    }
+  }
+
+  .button-text {
+    @apply relative z-10 flex items-center gap-2;
   }
 
   .score-badge {
@@ -143,7 +267,7 @@ form {
   }
 
   .uplader-drag-area {
-    @apply relative p-8 text-center transition-all duration-700 cursor-pointer bg-white rounded-2xl min-h-[208px];
+    @apply relative p-8 text-center transition-all duration-700 cursor-pointer bg-white rounded-2xl min-h-52;
   }
 
   .uploader-selected-file {
@@ -156,11 +280,11 @@ form {
 }
 
 @utility text-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-[#AB8C95] via-[#000000] to-[#8E97C5];
+  @apply bg-clip-text text-transparent bg-linear-to-r from-[#AB8C95] via-[#000000] to-[#8E97C5];
 }
 
 @utility gradient-hover {
-  @apply bg-gradient-to-b from-light-blue-100 to-light-blue-200;
+  @apply bg-linear-to-b from-light-blue-100 to-light-blue-200;
 }
 
 @utility primary-gradient {

@@ -1,4 +1,4 @@
-export const resumes: Resume[] = [
+export const resume: Resume[] = [
   {
     id: "1",
     companyName: "Google",
