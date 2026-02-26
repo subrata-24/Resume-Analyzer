@@ -11,78 +11,226 @@ interface ATSProps {
 }
 
 const ATS: React.FC<ATSProps> = ({ score, suggestions }) => {
-  // Determine background gradient based on score
-  const gradientClass =
-    score > 69
-      ? "from-green-100"
-      : score > 49
-        ? "from-yellow-100"
-        : "from-red-100";
+  const isGood = score > 69;
+  const isAverage = score > 49;
 
-  // Determine icon based on score
-  const iconSrc =
-    score > 69
-      ? "/icons/ats-good.svg"
-      : score > 49
-        ? "/icons/ats-warning.svg"
-        : "/icons/ats-bad.svg";
-
-  // Determine subtitle based on score
-  const subtitle =
-    score > 69 ? "Great Job!" : score > 49 ? "Good Start" : "Needs Improvement";
+  const scoreColor = isGood ? "#34d399" : isAverage ? "#fbbf24" : "#f87171";
+  const scoreBg = isGood
+    ? "rgba(52,211,153,0.08)"
+    : isAverage
+      ? "rgba(251,191,36,0.08)"
+      : "rgba(248,113,113,0.08)";
+  const scoreBorder = isGood
+    ? "rgba(52,211,153,0.2)"
+    : isAverage
+      ? "rgba(251,191,36,0.2)"
+      : "rgba(248,113,113,0.2)";
+  const label = isGood
+    ? "Great Match"
+    : isAverage
+      ? "Good Start"
+      : "Needs Improvement";
+  const desc = isGood
+    ? "Your resume is well-optimized for ATS systems. Keep it up!"
+    : isAverage
+      ? "Your resume passes basic ATS checks but has room to improve."
+      : "Your resume may be filtered out by ATS. Focus on the tips below.";
 
   return (
     <div
-      className={`bg-gradient-to-b ${gradientClass} to-white rounded-2xl shadow-md w-full p-6`}
+      style={{
+        background: "rgba(255,255,255,0.03)",
+        border: "1px solid rgba(255,255,255,0.07)",
+        borderRadius: 18,
+        overflow: "hidden",
+      }}
     >
-      {/* Top section with icon and headline */}
-      <div className="flex items-center gap-4 mb-6">
-        <img src={iconSrc} alt="ATS Score Icon" className="w-12 h-12" />
+      {/* Header */}
+      <div
+        style={{
+          padding: "22px 28px",
+          borderBottom: "1px solid rgba(255,255,255,0.05)",
+          display: "flex",
+          alignItems: "center",
+          gap: 16,
+        }}
+      >
+        {/* big score pill */}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            width: 72,
+            height: 72,
+            borderRadius: 16,
+            flexShrink: 0,
+            background: scoreBg,
+            border: `1px solid ${scoreBorder}`,
+            boxShadow: `0 0 20px ${scoreColor}22`,
+          }}
+        >
+          <span
+            style={{
+              color: scoreColor,
+              fontSize: 22,
+              fontWeight: 900,
+              lineHeight: 1,
+              letterSpacing: "-0.03em",
+            }}
+          >
+            {score}
+          </span>
+          <span
+            style={{
+              color: "rgba(255,255,255,0.2)",
+              fontSize: 9,
+              fontFamily: "monospace",
+              letterSpacing: "0.06em",
+            }}
+          >
+            ATS
+          </span>
+        </div>
+
         <div>
-          <h2 className="text-2xl font-bold">ATS Score - {score}/100</h2>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 8,
+              marginBottom: 4,
+            }}
+          >
+            <h2
+              style={{
+                color: "#fff",
+                fontSize: 18,
+                fontWeight: 800,
+                margin: 0,
+                letterSpacing: "-0.02em",
+              }}
+            >
+              ATS Score
+            </h2>
+            <span
+              style={{
+                background: scoreBg,
+                border: `1px solid ${scoreBorder}`,
+                color: scoreColor,
+                fontSize: 10,
+                fontWeight: 700,
+                padding: "2px 10px",
+                borderRadius: 99,
+                fontFamily: "monospace",
+              }}
+            >
+              {label.toUpperCase()}
+            </span>
+          </div>
+          <p
+            style={{
+              color: "rgba(255,255,255,0.35)",
+              fontSize: 13,
+              margin: 0,
+              lineHeight: 1.5,
+            }}
+          >
+            {desc}
+          </p>
         </div>
       </div>
 
-      {/* Description section */}
-      <div className="mb-6">
-        <h3 className="text-xl font-semibold mb-2">{subtitle}</h3>
-        <p className="text-gray-600 mb-4">
-          This score represents how well your resume is likely to perform in
-          Applicant Tracking Systems used by employers.
+      {/* Suggestions */}
+      <div
+        style={{
+          padding: "16px 28px 22px",
+          display: "flex",
+          flexDirection: "column",
+          gap: 10,
+        }}
+      >
+        <p
+          style={{
+            color: "rgba(255,255,255,0.25)",
+            fontSize: 10,
+            fontFamily: "monospace",
+            letterSpacing: "0.12em",
+            marginBottom: 4,
+          }}
+        >
+          SUGGESTIONS
         </p>
-
-        {/* Suggestions list */}
-        <div className="space-y-3">
-          {suggestions.map((suggestion, index) => (
-            <div key={index} className="flex items-start gap-3">
-              <img
-                src={
-                  suggestion.type === "good"
-                    ? "/icons/check.svg"
-                    : "/icons/warning.svg"
-                }
-                alt={suggestion.type === "good" ? "Check" : "Warning"}
-                className="w-5 h-5 mt-1"
-              />
-              <p
-                className={
-                  suggestion.type === "good"
-                    ? "text-green-700"
-                    : "text-amber-700"
-                }
+        {suggestions.map((s, i) => {
+          const good = s.type === "good";
+          return (
+            <div
+              key={i}
+              style={{
+                display: "flex",
+                alignItems: "flex-start",
+                gap: 12,
+                padding: "12px 16px",
+                borderRadius: 12,
+                background: good
+                  ? "rgba(52,211,153,0.05)"
+                  : "rgba(251,191,36,0.05)",
+                border: `1px solid ${good ? "rgba(52,211,153,0.15)" : "rgba(251,191,36,0.15)"}`,
+              }}
+            >
+              <div
+                style={{
+                  width: 20,
+                  height: 20,
+                  borderRadius: 6,
+                  flexShrink: 0,
+                  marginTop: 1,
+                  background: good
+                    ? "rgba(52,211,153,0.15)"
+                    : "rgba(251,191,36,0.15)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: 11,
+                  fontWeight: 900,
+                  color: good ? "#34d399" : "#fbbf24",
+                }}
               >
-                {suggestion.tip}
+                {good ? "✓" : "!"}
+              </div>
+              <p
+                style={{
+                  color: good
+                    ? "rgba(52,211,153,0.85)"
+                    : "rgba(251,191,36,0.85)",
+                  fontSize: 13,
+                  margin: 0,
+                  lineHeight: 1.6,
+                }}
+              >
+                {s.tip}
               </p>
             </div>
-          ))}
-        </div>
+          );
+        })}
       </div>
 
-      {/* Closing encouragement */}
-      <p className="text-gray-700 italic">
-        Keep refining your resume to improve your chances of getting past ATS
-        filters and into the hands of recruiters.
-      </p>
+      {/* Footer note */}
+      <div style={{ padding: "12px 28px 18px" }}>
+        <p
+          style={{
+            color: "rgba(255,255,255,0.18)",
+            fontSize: 11,
+            fontStyle: "italic",
+            margin: 0,
+            lineHeight: 1.6,
+          }}
+        >
+          Keep refining your resume to improve your chances of getting past ATS
+          filters and into the hands of recruiters.
+        </p>
+      </div>
     </div>
   );
 };
