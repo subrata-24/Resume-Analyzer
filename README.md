@@ -1,87 +1,113 @@
-# Welcome to React Router!
+# 🚀 AI Resume Analyzer & ATS Scorer
 
-A modern, production-ready template for building full-stack React applications using React Router.
+An intelligent AI-powered Resume Analyzer that evaluates resumes against job descriptions and generates structured ATS scores, detailed feedback, and improvement suggestions.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
-
-## Features
-
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
-
-## Getting Started
-
-### Installation
-
-Install the dependencies:
-
-```bash
-npm install
-```
-
-### Development
-
-Start the development server with HMR:
-
-```bash
-npm run dev
-```
-
-Your application will be available at `http://localhost:5173`.
-
-## Building for Production
-
-Create a production build:
-
-```bash
-npm run build
-```
-
-## Deployment
-
-### Docker Deployment
-
-To build and run using Docker:
-
-```bash
-docker build -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
-```
-
-The containerized application can be deployed to any platform that supports Docker, including:
-
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
-
-### DIY Deployment
-
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
-```
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
+This application simulates how real-world Applicant Tracking Systems (ATS) evaluate resumes and provides actionable feedback to improve job match probability.
 
 ---
 
-Built with ❤️ using React Router.
+## 🌐 Live Demo
+
+👉 **Live Application:** https://puter.com/app/ai-resume-analyzer-173  
+
+---
+
+## 📸 Screenshots
+
+### 🏠 Home Page
+![Home](./public/ss/home.png)
+
+### 📤 Resume Upload
+![Upload](./public/ss/upload.png)
+
+### 📊 Detailed Feedback View
+![Details](./public/ss/details.png)
+
+---
+
+## ✨ Features
+
+- 🔐 User Authentication (Handled by Puter.js)
+- 📄 Resume Upload (PDF/Image Supported)
+- 🧠 AI-Powered ATS Analysis
+- 📊 Overall Resume Score (0–100)
+- 📌 Category-Based Feedback:
+  - ATS Compatibility
+  - Tone & Style
+  - Content Quality
+  - Structure
+  - Skills Match
+- 🗂 Session-Based User Dashboard
+- 🖼 Resume Image Preview (Side-by-side Feedback View)
+- 🗑 Session Delete Functionality
+- ⚡ Real-Time AI Response
+- 🎯 Job Description Specific Scoring
+
+---
+
+## 🧠 How It Works
+
+1. User logs in using Puter authentication.
+2. Uploads resume (PDF or image format).
+3. Provides:
+   - Job Title
+   - Company Name
+   - Job Description
+4. AI model analyzes resume against job description.
+5. Generates:
+   - Overall Score
+   - ATS Score
+   - Detailed Category Breakdown
+   - Improvement Suggestions
+6. The analysis is saved as a session in the user dashboard.
+7. Users can:
+   - View past sessions
+   - Revisit detailed feedback
+   - Delete sessions anytime
+
+---
+## 🏗 Tech Stack
+
+### Frontend
+  - React 19
+  - TypeScript
+  - Tailwind CSS
+  - Zustand (State Management)
+  - React Router 7
+### Backend & Auth
+  - Puter.js (Authentication, Session Storage)
+  - AI Model
+  - Claude Sonnet 4
+### File Handling
+  - PDF.js
+  - React Dropzone
+
+---
+
+## ⚙️ Installation & Setup
+  - Clone the repository
+  ```
+     git clone https://github.com/subrata-24/resume-analyzer.git
+     cd resume-analyzer
+  ```
+  - Install dependencies
+    ```
+    npm install
+    ```
+  - Run development server
+    ```
+    npm run dev
+    ```
+  - Build for production
+    ```
+    npm run build
+    ```
+
+---
+## 🎯 Use Cases
+  - Fresh graduates optimizing resumes
+  - MERN stack developers tailoring resumes
+  - Job seekers matching resumes to specific job descriptions
+  - Improving ATS pass rate before applying
+---
+
