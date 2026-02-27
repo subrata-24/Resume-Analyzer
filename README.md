@@ -85,16 +85,16 @@ This application simulates how real-world Applicant Tracking Systems (ATS) evalu
 ---
 
 ## ⚙️ Installation & Setup
-  Clone the repository
+  - Clone the repository
   ```
      git clone https://github.com/your-username/resume-analyzer.git
      cd resume-analyzer
   ```
-  Install dependencies
+  - Install dependencies
     ```npm install```
-  Run development server
+  - Run development server
     ```npm run dev```
-  Build for production
+  - Build for production
     ```npm run build```
 
 ---
