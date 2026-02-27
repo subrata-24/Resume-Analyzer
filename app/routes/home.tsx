@@ -53,7 +53,7 @@ export default function Home() {
     auth.isAuthenticated && !loadingResume && resumes?.length === 0;
 
   return (
-    <main className="min-h-screen bg-[#050810] relative overflow-x-hidden">
+    <main className="h-screen bg-[#050810] relative overflow-x-hidden overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
       {/* Ambient background blobs */}
       <div className="pointer-events-none fixed inset-0 z-0">
         <div className="absolute top-[-10%] left-[-5%] w-[600px] h-[600px] rounded-full bg-violet-600/10 blur-[120px]" />
